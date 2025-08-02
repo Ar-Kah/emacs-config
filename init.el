@@ -1,17 +1,16 @@
 ;; UTF-8 everywhere
 
-(prefer-coding-system 'utf-8)
-(set-language-environment "UTF-8")
-(set-default-coding-systems 'utf-8)
-(set-terminal-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
-(set-selection-coding-system 'utf-8)
-
+;; set the default offset to 4 spaces
 (setq c-default-style "linux"
       c-basic-offset 4)
 
-(setq default-directory "c:/Users/Omistaja/Documents/Programming")
+;; use home as default directory
+(setq default-directory "~/")
 (add-hook 'emacs-startup-hook (lambda () (dired default-directory)))
+
+;; downlaod vterm
+(use-package vterm
+  :ensure t)
 
 ;; Start in fullscreen
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
@@ -33,11 +32,6 @@
   (package-install 'use-package))
 (require 'use-package)
 (setq use-package-always-ensure t)
-
-;; Theme
-(use-package gruber-darker-theme
-  :config
-  (load-theme 'gruber-darker t))
 
 ;; Interface tweaks
 (menu-bar-mode -1)
@@ -114,13 +108,13 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes '(gruber-darker))
+ '(custom-enabled-themes '(tsdh-dark))
  '(custom-safe-themes
-   '("e13beeb34b932f309fb2c360a04a460821ca99fe58f69e65557d6c1b10ba18c7"
-     default))
+   '("e13beeb34b932f309fb2c360a04a460821ca99fe58f69e65557d6c1b10ba18c7" default))
  '(display-line-numbers-type 'relative)
  '(inhibit-startup-screen t)
- '(package-selected-packages nil))
+ '(package-selected-packages
+   '(vterm melpa-upstream-visit yasnippet lsp-ui evil-collection company)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -160,3 +154,5 @@
 ;; Bind § key globally
 (global-set-key (kbd "§") 'toggle-evil-insert-normal)
 (put 'upcase-region 'disabled nil)
+
+(setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
